@@ -14,10 +14,11 @@ use Filament\Forms\Set;
 use Filament\Forms\Get;
 use Illuminate\Support\Str;
 use App\Models\User;
+
 class NewsletterResource extends Resource
 {
     protected static ?string $model = Newsletter::class;
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-newspaper';
     public static function form(Form $form): Form
     {
         return $form
@@ -39,7 +40,7 @@ class NewsletterResource extends Resource
                     ->unique(ignoreRecord: true)
                     ->readonly(),
                 Forms\Components\Select::make('author')
-                    ->options(User::all()->pluck('name', 'id'))
+                    ->options(User::all()->pluck('name', 'name'))
                     ->placeholder('Select an author')
                     ->required(),
                 Forms\Components\DateTimePicker::make('published_at')
@@ -58,7 +59,7 @@ class NewsletterResource extends Resource
                 Tables\Columns\TextColumn::make('subject')
                     ->sortable()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('author.name')
+                Tables\Columns\TextColumn::make('author')
                     ->label('Author')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('published_at')
