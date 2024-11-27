@@ -14,6 +14,10 @@ use Filament\Forms\Set;
 use Filament\Forms\Get;
 use Illuminate\Support\Str;
 use App\Models\User;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\TextInput;
 
 class NewsletterResource extends Resource
 {
@@ -47,9 +51,51 @@ class NewsletterResource extends Resource
                     ->nullable()
                     ->seconds(false)
                     ->label('Publish Date'),
-                Forms\Components\RichEditor::make('body')
-                    ->required()
-                    ->columnSpan(2),
+                Forms\Components\Builder::make('content')
+                ->blocks([
+                    Forms\Components\Builder\Block::make('heading')
+                        ->schema([
+                            TextInput::make('content')
+                                ->label('Heading')
+                                ->columnSpan(2)
+                                ->required(),
+                            Select::make('level')
+                                ->options([
+                                    'h1' => 'Heading 1',
+                                    'h2' => 'Heading 2',
+                                    'h3' => 'Heading 3',
+                                    'h4' => 'Heading 4',
+                                    'h5' => 'Heading 5',
+                                    'h6' => 'Heading 6',
+                                ])
+                                ->required(),
+                            Select::make('Position')
+                                ->options([
+                                    'text-left' => 'Left',
+                                    'text-center' => 'Centered',
+                                ])
+                                ->required(),
+                        ])
+                        ->columns(2),
+                    Forms\Components\Builder\Block::make('text')
+                        ->schema([
+                            RichEditor::make('content')
+                                ->label('Text')
+                                ->required(),
+                        ]),
+                    Forms\Components\Builder\Block::make('image')
+                        ->schema([
+                            FileUpload::make('url')
+                                ->label('Image')
+                                ->image()
+                                ->required(),
+                            TextInput::make('alt')
+                                ->label('Alt text')
+                                ->required(),
+                        ]),
+                ])
+                ->required()
+                ->columnSpan(2),
             ]);
     }
     public static function table(Table $table): Table
