@@ -54,9 +54,7 @@
                                     @endif
 
                                     <div class="px-4 py-3">
-                                        <a href="{{ route('newsletter.show', $newsletter) }}">
-                                            <h2 class="font-bold text-lg leading-none">{{ $newsletter->subject }}</h2>
-                                        </a>
+                                        <h2 class="font-bold text-lg leading-none">{{ $newsletter->subject }}</h2>
                                         <p class="text-sm leading-none opacity-50 mt-1">{!! sprintf('Created by %s', $newsletter->author) !!}</p>
 
                                         <p class="mt-4">{{ $newsletter->description }}</p>
