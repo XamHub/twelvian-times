@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('subject');
             $table->string('slug')->unique();
             $table->string('thumbnail')->nullable();
+            $table->string('description')->nullable();
             $table->json('blocks');
             $table->string('author')->nullable();
             $table->timestamp('published_at')

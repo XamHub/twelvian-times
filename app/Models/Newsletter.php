@@ -8,6 +8,7 @@ class Newsletter extends Model
         'subject',
         'slug',
         'thumbnail',
+        'description',
         'blocks',
         'author',
         'published_at',

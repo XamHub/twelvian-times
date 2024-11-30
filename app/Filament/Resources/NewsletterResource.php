@@ -53,8 +53,9 @@ class NewsletterResource extends Resource
                     ->label('Publish Date'),
                 Forms\Components\FileUpload::make('thumbnail')
                     ->label('Thumbnail')
-                    ->image()
-                    ->columnSpan(2),
+                    ->image(),
+                Forms\Components\Textarea::make('description')
+                    ->autosize(),
                 Forms\Components\Builder::make('blocks')
                     ->blocks([
                         Forms\Components\Builder\Block::make('heading')

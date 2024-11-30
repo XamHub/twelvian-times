@@ -23,64 +23,50 @@
         @endif
     </head>
     <body class="font-serif antialiased bg-background text-primary py-12 px-2">
-        <div class="bg-content">
+        <div class="bg-content px-4">
             <div class="relative">
-                <div class="relative w-full px-6 mx-auto lg:max-w-7xl">
-                    <header class="grid items-center gap-2 py-10">
+                <div class="relative w-full px-6 mx-auto lg:max-w-7xl py-8">
+                    <div class="bg-secondary border-2 border-white w-full h-10"></div>
+
+                    <header class="grid items-center gap-2 pt-6 pb-10">
                         <div class="flex">
-                            <svg class="text-primary" xmlns="http://www.w3.org/2000/svg" width="100%" height="64" viewBox="0 0 100% 64">
-                                <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="Times New Roman, serif" font-size="60" fill="currentColor" font-weight="bold">
+                            <svg class="text-primary" xmlns="http://www.w3.org/2000/svg" width="100%" height="88" viewBox="0 0 100% 88">
+                                <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="Times New Roman, serif" font-size="80" fill="currentColor" font-weight="bold">
                                   {{ config('app.name') }}
                                 </text>
                             </svg>
                         </div>
-                        @if (Route::has('login'))
-                            <nav class="-mx-3 flex flex-1 justify-end">
-                                @auth
-                                    <a
-                                        href="{{ url('/dashboard') }}"
-                                        class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                                    >
-                                        Dashboard
-                                    </a>
-                                @else
-                                    <a
-                                        href="{{ route('login') }}"
-                                        class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                                    >
-                                        Log in
-                                    </a>
 
-                                    @if (Route::has('register'))
-                                        <a
-                                            href="{{ route('register') }}"
-                                            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                                        >
-                                            Register
-                                        </a>
-                                    @endif
-                                @endauth
-                            </nav>
-                        @endif
+                        <div class="flex justify-center border-4 border-secondary p-2">{{ sprintf('Written by %s', "Whirley'sWorld") }}</div>
                     </header>
 
                     <main class="min-h-screen">
-                        <div class="grid grid-cols-2">
+                        <div class="grid grid grid-cols-5 grid-rows-3">
                             @foreach($newsletters as $newsletter)
-                                <article>
+                                <article @class([
+                                    "col-span-3 row-span-3" => $loop->first,
+                                    "col-span-2 row-span-3" => !$loop->first,
+                                ])>
+                                    @if($loop->first && isset($newsletter->thumbnail))
                                     <picture>
-                                        <img src="{{ Storage::url($newsletter->thumbnail) }}" alt="{{ $newsletter->subject }}" class="w-full h-64 object-cover" />
+                                        <img src="{{ Storage::url($newsletter->thumbnail) }}" alt="{{ $newsletter->subject }}" class="w-full h-80 object-cover" />
                                     </picture>
+                                    @endif
+
                                     <div class="px-4 py-3">
-                                        <h3 class="font-bold">{{ $newsletter->subject }}</h3>
-                                        <p>{!! sprintf('Created by %s', $newsletter->author) !!}</p>
+                                        <a href="{{ route('newsletter.show', $newsletter) }}">
+                                            <h2 class="font-bold text-lg leading-none">{{ $newsletter->subject }}</h2>
+                                        </a>
+                                        <p class="text-sm leading-none opacity-50 mt-1">{!! sprintf('Created by %s', $newsletter->author) !!}</p>
+
+                                        <p class="mt-4">{{ $newsletter->description }}</p>
                                     </div>
                                 </article>
                             @endforeach
                         </div>
                     </main>
 
-                    <footer class="py-16 flex justify-between text-sm text-primary">
+                    <footer class="flex justify-between text-sm text-primary">
                         <span>
                             {!! sprintf('%s is not affiliated with <a href="%s" class="text-black" target="_blank">%s</a> and is created by and for the <a href="%s" class="text-black" target="_blank">%s</a> community.', config('app.name'), 'https://ankama.com/', 'Ankama', 'https://dofus.com/', 'Dofus') !!}
                         </span>
