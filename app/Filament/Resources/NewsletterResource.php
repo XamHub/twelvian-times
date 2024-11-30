@@ -51,52 +51,68 @@ class NewsletterResource extends Resource
                     ->nullable()
                     ->seconds(false)
                     ->label('Publish Date'),
-                Forms\Components\Builder::make('content')
-                ->blocks([
-                    Forms\Components\Builder\Block::make('heading')
-                        ->schema([
-                            TextInput::make('content')
-                                ->label('Heading')
-                                ->columnSpan(2)
-                                ->required(),
-                            Select::make('level')
-                                ->options([
-                                    'h1' => 'Heading 1',
-                                    'h2' => 'Heading 2',
-                                    'h3' => 'Heading 3',
-                                    'h4' => 'Heading 4',
-                                    'h5' => 'Heading 5',
-                                    'h6' => 'Heading 6',
-                                ])
-                                ->required(),
-                            Select::make('Position')
-                                ->options([
-                                    'text-left' => 'Left',
-                                    'text-center' => 'Centered',
-                                ])
-                                ->required(),
-                        ])
-                        ->columns(2),
-                    Forms\Components\Builder\Block::make('text')
-                        ->schema([
-                            RichEditor::make('content')
-                                ->label('Text')
-                                ->required(),
-                        ]),
-                    Forms\Components\Builder\Block::make('image')
-                        ->schema([
-                            FileUpload::make('url')
-                                ->label('Image')
-                                ->image()
-                                ->required(),
-                            TextInput::make('alt')
-                                ->label('Alt text')
-                                ->required(),
-                        ]),
-                ])
-                ->required()
-                ->columnSpan(2),
-            ]);
+                Forms\Components\FileUpload::make('url')
+                    ->label('Thumbnail')
+                    ->image()
+                    ->columnSpan(2),
+                Forms\Components\Builder::make('blocks')
+                    ->blocks([
+                        Forms\Components\Builder\Block::make('heading')
+                            ->schema([
+                                TextInput::make('heading')
+                                    ->label('Heading')
+                                    ->columnSpan(2)
+                                    ->required(),
+                                Select::make('level')
+                                    ->options([
+                                        'h1' => 'Heading 1',
+                                        'h2' => 'Heading 2',
+                                        'h3' => 'Heading 3',
+                                        'h4' => 'Heading 4',
+                                        'h5' => 'Heading 5',
+                                        'h6' => 'Heading 6',
+                                    ])
+                                    ->required(),
+                                Select::make('position')
+                                    ->options([
+                                        'text-left' => 'Left',
+                                        'text-center' => 'Centered',
+                                    ])
+                                    ->required(),
+                            ])
+                            ->columns(2),
+                        Forms\Components\Builder\Block::make('text')
+                            ->schema([
+                                RichEditor::make('content')
+                                    ->label('Text')
+                                    ->required(),
+                            ]),
+                        Forms\Components\Builder\Block::make('image')
+                            ->schema([
+                                FileUpload::make('url')
+                                    ->label('Image')
+                                    ->image()
+                                    ->required()
+                                    ->columnSpan(2),
+                                Select::make('size')
+                                    ->options([
+                                        'w-full' => 'Full width',
+                                        'w-1/2' => 'Half width',
+                                        'w-1/3' => 'Third width',
+                                        'w-1/4' => 'Quarter width',
+                                    ])
+                                    ->placeholder('Select a size'),
+                                TextInput::make('alt')
+                                    ->label('Alt text')
+                                    ->required(),
+                            ])
+                            ->columns(2),
+                    ])
+                    ->reorderableWithButtons()
+                    ->collapsible()
+                    ->required()
+                    ->columnSpan(2),
+                ]);
     }
     public static function table(Table $table): Table
     {
@@ -109,10 +125,11 @@ class NewsletterResource extends Resource
                     ->label('Author')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('published_at')
-                    ->dateTime()
+                    ->dateTime('d-m-Y, H:i')
+                    ->sortable()
                     ->label('Publish Date'),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
+                    ->dateTime('d-m-Y, H:i'),
             ])        
             ->filters([
                 //

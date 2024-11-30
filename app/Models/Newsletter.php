@@ -7,10 +7,16 @@ class Newsletter extends Model
     protected $fillable = [
         'subject',
         'slug',
-        'body',
+        'blocks',
         'author',
         'published_at',
     ];
+
+    protected $casts = [
+        'blocks' => 'array',
+        'published_at' => 'datetime',
+    ];
+
     protected static function booted()
     {
         static::saving(function ($newsletter) {
