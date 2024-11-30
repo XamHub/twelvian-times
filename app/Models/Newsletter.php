@@ -7,6 +7,7 @@ class Newsletter extends Model
     protected $fillable = [
         'subject',
         'slug',
+        'thumbnail',
         'blocks',
         'author',
         'published_at',
@@ -15,6 +16,7 @@ class Newsletter extends Model
     protected $casts = [
         'blocks' => 'array',
         'published_at' => 'datetime',
+        'thumbnail' => 'string',
     ];
 
     protected static function booted()

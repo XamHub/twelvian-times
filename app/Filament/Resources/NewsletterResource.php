@@ -51,7 +51,7 @@ class NewsletterResource extends Resource
                     ->nullable()
                     ->seconds(false)
                     ->label('Publish Date'),
-                Forms\Components\FileUpload::make('url')
+                Forms\Components\FileUpload::make('thumbnail')
                     ->label('Thumbnail')
                     ->image()
                     ->columnSpan(2),
@@ -110,7 +110,6 @@ class NewsletterResource extends Resource
                     ])
                     ->reorderableWithButtons()
                     ->collapsible()
-                    ->required()
                     ->columnSpan(2),
                 ]);
     }

@@ -23,8 +23,8 @@
         @endif
     </head>
     <body class="font-serif antialiased bg-background text-primary py-12 px-2">
-        <div class="bg-content min-h-screen">
-            <div class="relative min-h-screen">
+        <div class="bg-content">
+            <div class="relative">
                 <div class="relative w-full px-6 mx-auto lg:max-w-7xl">
                     <header class="grid items-center gap-2 py-10">
                         <div class="flex">
@@ -64,8 +64,20 @@
                         @endif
                     </header>
 
-                    <main class="mt-6">
-                        
+                    <main class="min-h-screen">
+                        <div class="grid grid-cols-2">
+                            @foreach($newsletters as $newsletter)
+                                <article>
+                                    <picture>
+                                        <img src="{{ Storage::url($newsletter->thumbnail) }}" alt="{{ $newsletter->subject }}" class="w-full h-64 object-cover" />
+                                    </picture>
+                                    <div class="px-4 py-3">
+                                        <h3 class="font-bold">{{ $newsletter->subject }}</h3>
+                                        <p>{!! sprintf('Created by %s', $newsletter->author) !!}</p>
+                                    </div>
+                                </article>
+                            @endforeach
+                        </div>
                     </main>
 
                     <footer class="py-16 flex justify-between text-sm text-primary">
