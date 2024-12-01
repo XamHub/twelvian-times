@@ -9,5 +9,17 @@
         </svg>
     </a>
 
-    <div class="flex justify-center border-4 border-secondary p-2">{{ sprintf('Written by %s', "Whirly'sWorld") }}</div>
+    <div class="flex justify-between gap-3 border-4 border-secondary py-2 px-4">
+        <span>{{ __('The World of Twelve') }}</span>
+
+        @if(!request()->is('/') && $newsletter->subject)
+            <span>{{ $newsletter->subject }}</span>
+        @endif
+
+        @if(!request()->is('/'))
+            <span>{{ sprintf('Written by %s', $newsletter->author) }}</span>
+        @else
+            <span>{{ sprintf('Created by %s', "Whirly'sWorld") }}</span>
+        @endif
+    </div>
 </header>
