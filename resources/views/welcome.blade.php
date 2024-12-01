@@ -3,7 +3,7 @@
 
 @section('content')
 <section>
-    <div class="grid grid grid-cols-5 grid-rows-3">
+    <div class="grid grid-cols-5 grid-rows-4 gap-4">
         @foreach($newsletters as $newsletter)
             @include('newsletters.card')
         @endforeach

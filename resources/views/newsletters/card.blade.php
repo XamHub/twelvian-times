@@ -1,8 +1,8 @@
 <article @class([
-    "col-span-3 row-span-3" => $loop->first,
-    "col-span-2 row-span-3" => !$loop->first,
+    "col-span-3 row-span-4" => $loop->first,
+    "col-span-2 row-span-1" => !$loop->first,
 ])>
-    @if($loop->first && isset($newsletter->thumbnail))
+    @if(isset($newsletter->thumbnail))
     <picture>
         <img src="{{ Storage::url($newsletter->thumbnail) }}" alt="{{ $newsletter->subject }}" class="w-full h-80 object-cover" />
     </picture>
