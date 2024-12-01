@@ -9,5 +9,5 @@
         </svg>
     </a>
 
-    <div class="flex justify-center border-4 border-secondary p-2">{{ sprintf('Written by %s', "Whirley'sWorld") }}</div>
+    <div class="flex justify-center border-4 border-secondary p-2">{{ sprintf('Written by %s', "Whirly'sWorld") }}</div>
 </header>
