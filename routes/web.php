@@ -15,8 +15,6 @@ Route::get('/newsletters', function () {
     return view('newsletters.index', compact('newsletters'));
 });
 
-Route::get('/newsletters/{slug}', function ($slug) {
-    $newsletter = Newsletter::where('slug', $slug)->firstOrFail();
-
-    return view('newsletter', compact('newsletter'));
-});
+Route::get('/newsletters/{newsletter}', function (Newsletter $newsletter) {
+    return view('newsletters.show', compact('newsletter'));
+})->name('newsletters.show');

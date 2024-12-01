@@ -3,11 +3,17 @@
 
 @section('content')
 <section>
-    <div class="grid grid-cols-5 grid-rows-4 gap-4">
-        @foreach($newsletters as $newsletter)
-            @include('newsletters.card')
-        @endforeach
-    </div>
+    @if($newsletters->isEmpty())
+        <div class="text-center">
+            <h1 class="text-2xl font-bold">{{ __('No newsletters found') }}</h1>
+        </div>
+    @else
+        <div class="grid grid-cols-5 gap-x-4 gap-y-2">
+            @foreach($newsletters as $newsletter)
+                @include('newsletters.components.card')
+            @endforeach
+        </div>
+    @endif
 
     <div class="flex justify-center mt-8">
         <a href="{{ '/newsletters' }}">
