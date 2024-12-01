@@ -16,6 +16,14 @@
             @include('newsletters.blocks.image', ['block' => $block])
         @endif
     @endforeach
+
+    <div class="flex justify-center mt-8">
+        <a href="{{ '/newsletters' }}">
+            <button class="border-2 border-secondary hover:bg-secondary hover:text-white transition-all px-4 h-10">
+                <span>{{ __('More newsletters') }}</span>
+            </button>
+        </a>
+    </div>
 </section>
 
 @endsection

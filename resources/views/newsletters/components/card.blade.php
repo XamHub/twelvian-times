@@ -14,7 +14,7 @@
         <a href="{{ route('newsletters.show', $newsletter) }}" class="max-w-max">
             <h2 class="font-bold text-lg leading-none hover:text-primary/50 transition-all max-w-max">{{ $newsletter->subject }}</h2>
         </a>
-        <p class="text-sm leading-1 opacity-50 mt-1">{!! sprintf('Posted by %s', $newsletter->author) !!}</p>
+        <p class="text-sm leading-1 opacity-50 mt-1">{!! sprintf('Written by %s', $newsletter->author) !!}</p>
 
         @if($newsletter->description)
         <p class="mt-4">{{ $newsletter->description }}</p>

@@ -25,10 +25,10 @@
     <body class="font-serif antialiased bg-background text-primary py-8 px-2">
         <div class="bg-content triangles">
             <div class="relative">
-                <div class="relative w-full px-6 mx-auto lg:max-w-7xl py-4">
+                <div class="relative w-full px-4 md:px-6 mx-auto lg:max-w-7xl py-4">
                     @include('sections.header')
 
-                    <main class="min-h-screen">
+                    <main>
                         @yield('content')
                     </main>
 
