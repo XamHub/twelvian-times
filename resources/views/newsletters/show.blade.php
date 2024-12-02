@@ -2,7 +2,7 @@
 
 @section('content')
 
-<section>
+<article class="space-y-6">
     @foreach($newsletter->blocks as $block)
         @if($block['type'] === 'heading')
             @include('newsletters.blocks.heading', ['block' => $block])
@@ -24,6 +24,6 @@
             </button>
         </a>
     </div>
-</section>
+</article>
 
 @endsection

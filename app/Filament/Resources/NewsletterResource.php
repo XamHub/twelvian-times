@@ -87,6 +87,16 @@ class NewsletterResource extends Resource
                             ->schema([
                                 RichEditor::make('content')
                                     ->label('Text')
+                                    ->disableToolbarButtons([
+                                        'blockquote',
+                                        'strike',
+                                    ])
+                                    ->required(),
+                                Select::make('columns')
+                                    ->options([
+                                        'columns-1' => 'One column',
+                                        'columns-2' => 'Two columns',
+                                    ])
                                     ->required(),
                             ]),
                         Forms\Components\Builder\Block::make('image')
