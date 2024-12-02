@@ -14,6 +14,15 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                'background': '#d2c7c3',
+                'content': '#ebebeb',
+                'primary': '#4c4c4c',
+                'secondary': '#cddf70',
+            },
+            fontSize: {
+                'name': 'clamp(1.5rem, 8vw, 5rem)',
+            },
         },
     },
     plugins: [],
