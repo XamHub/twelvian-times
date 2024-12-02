@@ -50,6 +50,8 @@ class NewsletterResource extends Resource
                 Forms\Components\DateTimePicker::make('published_at')
                     ->nullable()
                     ->seconds(false)
+                    ->default(now())
+                    ->required()
                     ->label('Publish Date'),
                 Forms\Components\FileUpload::make('thumbnail')
                     ->label('Thumbnail')
