@@ -41,6 +41,13 @@ jobs:
       - name: Set folder permissions
         run: chmod -R 775 storage bootstrap/cache
 
+      - name: Debug DB Secrets
+        run: |
+          echo "DB_HOST=${{ secrets.DB_HOST }}"
+          echo "DB_DATABASE=${{ secrets.DB_DATABASE }}"
+          echo "DB_USERNAME=${{ secrets.DB_USERNAME }}"
+
+
       - name: Setup Database
         run: |
           sudo apt-get update
