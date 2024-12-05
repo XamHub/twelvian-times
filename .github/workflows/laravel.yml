@@ -41,12 +41,17 @@ jobs:
       - name: Set folder permissions
         run: chmod -R 775 storage bootstrap/cache
 
+      - name: Test DB Connection
+        run: |
+          mysql -h ${{ secrets.DB_HOST }} -u ${{ secrets.DB_USERNAME }} -p${{ secrets.DB_PASSWORD }} -e "SHOW DATABASES;"
+        env:
+          DB_HOST: ${{ secrets.DB_HOST }}
+          DB_USERNAME: ${{ secrets.DB_USERNAME }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+
       - name: Setup Database
         run: |
-          sudo apt-get update
-          sudo apt-get install mysql-server -y
-          sudo apt-get install mariadb-client -y
-          mysql -h ${{ secrets.DB_HOST }} -u ${{ secrets.DB_USERNAME }} -p ${{ secrets.DB_PASSWORD }} -e "CREATE DATABASE IF NOT EXISTS ${{ secrets.DB_DATABASE }};"
+          mysql -h ${{ secrets.DB_HOST }} -u ${{ secrets.DB_USERNAME }} -p${{ secrets.DB_PASSWORD }} -e "CREATE DATABASE IF NOT EXISTS \`${{ secrets.DB_DATABASE }}\`;"
         env:
           DB_HOST: ${{ secrets.DB_HOST }}
           DB_DATABASE: ${{ secrets.DB_DATABASE }}
