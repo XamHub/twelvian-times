@@ -1,4 +1,4 @@
-name: Laravel Deployment and Testing
+name: Laravel Deployment
 
 on:
   push:
@@ -51,14 +51,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Add SSH key
+        uses: webfactory/ssh-agent@v0.10.4
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
       - name: Deploy to Server
         run: |
-          ssh ${{ secrets.CI_SSH }} -p ${{ secrets.CI_PORT }} << EOF
+          ssh -o StrictHostKeyChecking=no ${{ secrets.CI_SSH }} -p ${{ secrets.CI_PORT }} << EOF
           cd ${{ secrets.CI_PATH }}
           git pull origin main
           composer install --no-dev --optimize-autoloader
           php artisan migrate --force
           php artisan optimize
           EOF
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
