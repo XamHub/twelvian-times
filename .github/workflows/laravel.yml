@@ -51,8 +51,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Print SSH Key
+        run: echo "${{ secrets.SSH_PRIVATE_KEY }}" | awk '{print length}'
+
       - name: Add SSH key
-        uses: webfactory/ssh-agent@v0.9.0
+        uses: webfactory/ssh-agent@v0.9.1
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
@@ -65,4 +68,3 @@ jobs:
           php artisan migrate --force
           php artisan optimize
           EOF
-          
