@@ -8,7 +8,7 @@
             <h1 class="text-2xl font-bold">{{ __('No newsletters found') }}</h1>
         </div>
     @else
-        <div class="grid grid-cols-5 gap-x-4 gap-y-2">
+        <div class="grid lg:grid-cols-5 gap-x-4 gap-y-2">
             @foreach($newsletters as $newsletter)
                 @include('newsletters.components.card')
             @endforeach

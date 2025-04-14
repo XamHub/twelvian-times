@@ -1,6 +1,6 @@
 <article @class([
     "col-span-3 row-span-4" => $loop->first,
-    "col-span-2 row-span-1 border border-primary/50" => !$loop->first,
+    "col-span-3 lg:col-span-2 row-span-1 border border-primary/50" => !$loop->first,
 ])>
     @if($loop->first && isset($newsletter->thumbnail))
     <a href="{{ route('newsletters.show', $newsletter) }}" class="block">
